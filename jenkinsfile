@@ -19,6 +19,7 @@ pipeline {
 
                     sh 'git config --global user.name "Jenkins Pipeline"'
                     sh 'git config --global user.email "jenkins@localhost"'
+                    sh 'git branch  -m main'
                     sh 'git add /var/lib/jenkins/workspace/java-app-project/target/SampleServlet.war -f'
                     sh 'git commit -m "jenkins: adding war file"'
                     withCredentials([gitUsernamePassword(credentialsId: 'github-token', gitToolName: 'git-tool')]){
