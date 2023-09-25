@@ -12,7 +12,6 @@ pipeline {
 		        sh 'mvn package'
             }
         }
-        stages {
                 stage("Clone Git Repository") {
                     steps {
                         git(
