@@ -3,7 +3,7 @@
   become: true
   become_user: root
   gather_facts: false
-  vars: 
+  vars:
     tomcat_group: tomcat
     tomcat_user: tomcat
     http_port: 8080
@@ -21,11 +21,11 @@
        update_cache: yes
 
     - name: "add group tomcat"
-      group: 
+      group:
         name={{tomcat_group}}
 
     - name: "add user tomcat"
-      user: 
+      user:
         name={{tomcat_user}} 
         group={{tomcat_group}} 
         home=/usr/share/tomcat 
@@ -48,14 +48,14 @@
     - name: "Configure Tomcat server"
       template: src=/root/maven-ansible-project/roles/tomcat/templates/server.xml dest=/usr/share/tomcat/conf/
 
-      
+
     - name: "Create  sample directory"
-      file: 
+      file:
         path: "/opt/apache-tomcat-7.0.61/webapps/samples"
         state: directory
         mode: 0777
-        
-      
+
+
 
     - name: "copy war file"
       copy: src=~/result/target/SampleServlet.war dest=/opt/apache-tomcat-7.0.61/webapps/
@@ -65,13 +65,12 @@
 
 
     - name: "Install Tomcat init script"
-      copy: src=~/maven-ansible-project/roles/tomcat/files/tomcat-initscript.sh dest=/etc/init.d/tomcat mode=0755
+      copy: src=~/maven-ansible-project/roles/tomcat/files/tomcat.service dest=/etc/systemd/system mode=0755
 
-    #- name: "Start Tomcat"
-     # service: name=tomcat state=started enabled=yes
-    - name: start tomcat7 service
-      command: "nohup /etc/init.d/tomcat"
-      tags: starttom
-   
+    - name: "Start Tomcat"
+      service: name=tomcat state=started enabled=yes
+      daemon_reload: true
+
+
     - name: "wait for tomcat to start"
       wait_for: port={{http_port}}
