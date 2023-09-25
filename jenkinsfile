@@ -23,7 +23,7 @@ pipeline {
                     sh 'git commit -m "jenkins: adding war file"'
                     withCredentials([gitUsernamePassword(credentialsId: 'github-token', gitToolName: 'git-tool')]){
                          sh "git remote set-url origin git@github.com:mmehdizadeh7777/result.git"
-                         sh 'git push origin master'
+                         sh 'git push -u origin master'
                     }
 	        }
          }
