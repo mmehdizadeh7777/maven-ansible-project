@@ -15,7 +15,7 @@ pipeline {
 
 	    stage('push war file in Git') {
             steps {
-                echo "commiting changes from jenkins into gitHub"
+                echo "adding war file from jenkins into gitHub"
 
                     withCredentials([gitUsernamePassword(credentialsId: 'github-token', gitToolName: 'Default')])
                     sh 'git config --global user.name "Jenkins Pipeline"'
