@@ -70,7 +70,7 @@
     #- name: "Start Tomcat"
      # service: name=tomcat state=started enabled=yes
     - name: start tomcat7 service
-      command: "nohup /usr/local/apache-tomcat-7.0.61/bin/startup.sh"
+      command: "nohup /etc/init.d/tomcat"
       tags: starttom
    
     - name: "wait for tomcat to start"
