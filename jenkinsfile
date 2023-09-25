@@ -18,6 +18,8 @@ pipeline {
                 echo "commiting changes from jenkins into gitHub"
                 script{
                     withCredentials([gitUsernamePassword(credentialsId: 'github-token', gitToolName: 'Default')])
+                    sh 'git config --global user.name "Jenkins Pipeline"'
+                    sh 'git config --global user.email "jenkins@localhost"'
                     sh "git remote set-url origin git@github.com:mmehdizadeh7777/result.git"
                     sh 'git add SampleServlet.war'
                     sh 'git commit -m "jenkins: adding war file" SampleServlet.war'
