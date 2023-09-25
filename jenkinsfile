@@ -56,7 +56,7 @@ pipeline {
 
                    steps {
                            echo "deploying ansible playbook on ec2"
-                           sh "ansible-playbook ~/roles/tomcat/tasks/main.yml -i my-inventory -u jenkins --private-key ~/.ssh/id_rsa"
+                           sh "ansible-playbook ./roles/tomcat/tasks/main.yml -i my-inventory -u jenkins --private-key ~/.ssh/id_rsa"
                    }
                 }
     }
