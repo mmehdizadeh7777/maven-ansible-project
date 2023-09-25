@@ -1,0 +1,39 @@
+pipeline {
+    agent any
+	tools {
+		maven 'local-maven'
+	}
+
+    stages {
+        stage('build') {
+            steps {
+                echo 'building....'
+                sh 'mvn clean package'
+		        sh 'mvn package'
+            }
+        }
+
+	    stage('push war file in Git') {
+            steps {
+                echo "commiting changes from jenkins into gitHub"
+                 sh "git remote set-url origin git@github.com:mmehdizadeh7777/result.git"
+                        sh 'git add SampleServlet.war'
+                        sh 'git commit -m "jenkins: adding war file" SampleServlet.war'
+                        sh 'git push origin HEAD:jenkins-jobs'
+	             }
+            }
+
+        stage('copy war file in EC2') {
+                    steps {
+                        echo "copying war file in EC2 folder"
+                        script{
+                            def gitcmd = 'git clone https://github.com//mmehdizadeh7777/result.git --depth 1 --branch=main ~/target/'
+                            sshagent(['ec2-server-key']) {
+                              sh "ssh -o StrictHostKeyChecking=no ubuntu@3.82.146.38 ${gitcmd}"
+                            }
+                        }
+
+        	             }
+                    }
+    }
+}
