@@ -74,7 +74,6 @@
           name: tomcat
           enabled: yes
           state: restarted
-          become: true
    
     - name: "wait for tomcat to start"
       wait_for: port={{http_port}}
