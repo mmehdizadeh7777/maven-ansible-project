@@ -58,6 +58,9 @@
 
 
       notify: restart tomcat
+      handlers:
+        - name: "restart tomcat"
+          service: name=tomcat state=restarted
 
     - name: "Install Tomcat init script"
       copy: src=tomcat-initscript.sh dest=/etc/init.d/tomcat mode=0755
