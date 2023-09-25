@@ -69,11 +69,9 @@
 
     #- name: "Start Tomcat"
      # service: name=tomcat state=started enabled=yes
-    - name: "enable tomcat startup"
-      systemd:
-          name: tomcat
-          enabled: yes
-          state: restarted
+    - name: start tomcat7 service
+      command: "nohup /usr/local/apache-tomcat-7.0.61/bin/startup.sh"
+      tags: starttom
    
     - name: "wait for tomcat to start"
       wait_for: port={{http_port}}
