@@ -56,7 +56,7 @@ pipeline {
 
                    steps {
 
-                           sh "ansible-playbook main.yml -i my-inventory -- user jenkins --key-file ~/.ssh/id_rsa"
+                           sh "ansible-playbook main.yml -i my-inventory -u jenkins -k ~/.ssh/id_rsa"
                    }
                 }
     }
