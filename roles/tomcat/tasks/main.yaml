@@ -8,6 +8,10 @@
     tomcat_user: tomcat
     http_port: 8080
     https_port: 8443
+  handlers:
+    - name: "restart tomcat"
+      service: name=tomcat state=restarted
+
   tasks:
     - name: "Install Java 11"
       apt: name=openjdk-11-jre-headless state=present
@@ -58,9 +62,7 @@
 
 
       notify: restart tomcat
-      handlers:
-        - name: "restart tomcat"
-          service: name=tomcat state=restarted
+
 
     - name: "Install Tomcat init script"
       copy: src=tomcat-initscript.sh dest=/etc/init.d/tomcat mode=0755
