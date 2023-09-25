@@ -14,14 +14,12 @@ pipeline {
         }
                 stage("Clone Git Repository") {
                     steps {
-                    // withCredentials([gitUsernamePassword(credentialsId: 'github-token', gitToolName: 'git-tool')]){
                         git(
                             url: "https://github.com/mmehdizadeh7777/result.git",
                             branch: "main",
                             changelog: true,
                             poll: true
                         )
-                      //  }
                     }
                 }
 	    stage('push war file in Git') {
@@ -42,7 +40,7 @@ pipeline {
                     steps {
                         echo "copying war file in EC2 folder"
                         script{
-                            def gitcmd = 'git clone git@github.com:mmehdizadeh7777/result.git --depth 1 --branch=main ~/target/'
+                            def gitcmd = 'git clone git@github.com:mmehdizadeh7777/result.git --depth 1 --branch=main ./target/'
                             sshagent(['ec2-server-key']) {
                               sh "ssh -o StrictHostKeyChecking=no ubuntu@3.82.146.38 ${gitcmd}"
                             }
