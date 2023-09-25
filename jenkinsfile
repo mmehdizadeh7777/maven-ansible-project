@@ -8,6 +8,7 @@ pipeline {
         stage('build') {
             steps {
                 echo 'building....'
+                sh 'cd BasicWebApplication/'
                 sh 'mvn clean package'
 		        sh 'mvn package'
             }
