@@ -46,6 +46,7 @@ pipeline {
                                     def gitcmd = 'git clone https://github.com/mmehdizadeh7777/result.git --depth 1 --branch=main ./result'
                                     sshagent(['ec2-server-key']) {
                                       sh "ssh -o StrictHostKeyChecking=no ubuntu@3.82.146.38 ${gitcmd}"
+
                                     }
                                 }
 
@@ -56,6 +57,7 @@ pipeline {
 
                    steps {
                            echo "deploying ansible playbook on ec2"
+                           sh 'pwd'
                            sh "ansible-playbook ./roles/tomcat/tasks/main.yml -i my-inventory -u jenkins --private-key ~/.ssh/id_rsa"
                    }
                 }
