@@ -4,7 +4,7 @@ pipeline {
 		maven 'local-maven'
 	}
 	parameters {
-    		booleanParam(name: 'executeGitpush', defaultValue: true, description: '')
+    		booleanParam(name: 'executeGitpush', defaultValue: false, description: '')
     }
 
     stages {
