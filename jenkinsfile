@@ -43,7 +43,7 @@ pipeline {
                     steps {
                         echo "copying war file in EC2 folder"
                         script{
-                            def gitcmd = 'git clone https://github.com/mmehdizadeh7777/result.git --depth 1 --branch=main .'
+                            def gitcmd = 'git clone https://github.com/mmehdizadeh7777/result.git --depth 1 --branch=main ./result'
                             sshagent(['ec2-server-key']) {
                               sh "ssh -o StrictHostKeyChecking=no ubuntu@3.82.146.38 ${gitcmd}"
                             }
