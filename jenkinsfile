@@ -16,8 +16,7 @@ pipeline {
 	    stage('push war file in Git') {
             steps {
                 echo "adding war file from jenkins into gitHub"
-
-                    withCredentials([gitUsernamePassword(credentialsId: 'github-token', gitToolName: 'Default')])
+                    withCredentials([gitUsernamePassword(credentialsId: 'github-token', gitToolName: 'git-tool')])
                     sh 'git config --global user.name "Jenkins Pipeline"'
                     sh 'git config --global user.email "jenkins@localhost"'
                     sh "git remote set-url origin git@github.com:mmehdizadeh7777/result.git"
