@@ -39,17 +39,25 @@ pipeline {
                     }
                 }
 
-        stage('copy war file in EC2') {
-                    steps {
-                        echo "copying war file in EC2 folder"
-                        script{
-                            def gitcmd = 'git clone https://github.com/mmehdizadeh7777/result.git --depth 1 --branch=main ./result'
-                            sshagent(['ec2-server-key']) {
-                              sh "ssh -o StrictHostKeyChecking=no ubuntu@3.82.146.38 ${gitcmd}"
-                            }
-                        }
+                stage('copy war file in EC2') {
+                            steps {
+                                echo "copying war file in EC2 folder"
+                                script{
+                                    def gitcmd = 'git clone https://github.com/mmehdizadeh7777/result.git --depth 1 --branch=main ./result'
+                                    sshagent(['ec2-server-key']) {
+                                      sh "ssh -o StrictHostKeyChecking=no ubuntu@3.82.146.38 ${gitcmd}"
+                                    }
+                                }
 
-        	             }
-                    }
+                            }
+                }
+
+                stage('Ansible Deploy') {
+
+                   steps {
+
+                           sh "ansible-playbook main.yml -i my-inventory -- user jenkins --key-file ~/.ssh/id_rsa"
+                   }
+                }
     }
 }
