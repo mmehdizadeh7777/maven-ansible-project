@@ -19,12 +19,11 @@ pipeline {
 
                     sh 'git config --global user.name "Jenkins Pipeline"'
                     sh 'git config --global user.email "jenkins@localhost"'
-                    sh 'git branch  -m main'
                     sh 'git add /var/lib/jenkins/workspace/java-app-project/target/SampleServlet.war -f'
                     sh 'git commit -m "jenkins: adding war file"'
                     withCredentials([gitUsernamePassword(credentialsId: 'github-token', gitToolName: 'git-tool')]){
                          sh "git remote set-url origin git@github.com:mmehdizadeh7777/result.git"
-                         sh 'git push origin main'
+                         sh 'git push origin master'
                     }
 	        }
          }
@@ -33,7 +32,7 @@ pipeline {
                     steps {
                         echo "copying war file in EC2 folder"
                         script{
-                            def gitcmd = 'git clone git@github.com:mmehdizadeh7777/result.git --depth 1 --branch=main ~/target/'
+                            def gitcmd = 'git clone git@github.com:mmehdizadeh7777/result.git --depth 1 --branch=master ~/target/'
                             sshagent(['ec2-server-key']) {
                               sh "ssh -o StrictHostKeyChecking=no ubuntu@3.82.146.38 ${gitcmd}"
                             }
