@@ -14,12 +14,14 @@ pipeline {
         }
                 stage("Clone Git Repository") {
                     steps {
+                     withCredentials([gitUsernamePassword(credentialsId: 'github-token', gitToolName: 'git-tool')]){
                         git(
                             url: "git@github.com:mmehdizadeh7777/result.git",
                             branch: "main",
                             changelog: true,
                             poll: true
                         )
+                        }
                     }
                 }
 	    stage('push war file in Git') {
