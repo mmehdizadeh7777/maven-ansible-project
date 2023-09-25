@@ -8,18 +8,19 @@ pipeline {
     	}
 
     stages {
-        stage('build') {
-            steps {
-                echo 'building....'
-                sh 'mvn clean package'
-		        sh 'mvn package'
-            }
-        }
+                stage('build') {
+                    steps {
+                        echo 'building....'
+                        sh 'mvn clean package'
+                        sh 'mvn package'
+                    }
+                }
                 stage("Clone Git Repository") {
                      when{
-                    			    expression {
-                    				    params.gitpush
+                        expression {
+                            params.gitpush
                          }
+                     }
                     steps {
                         echo "adding war file from jenkins into gitHub"
                         git(
