@@ -4,8 +4,8 @@ pipeline {
 		maven 'local-maven'
 	}
 	parameters {
-    		booleanParam(name: 'gitpush', defaultValue: true, description: '')
-    	}
+    		booleanParam(name: 'executeGitpush', defaultValue: true, description: '')
+    }
 
     stages {
                 stage('build') {
@@ -18,7 +18,7 @@ pipeline {
                 stage("Clone Git Repository") {
                      when{
                         expression {
-                            params.gitpush
+                            params.executeGitpush
                          }
                      }
                     steps {
