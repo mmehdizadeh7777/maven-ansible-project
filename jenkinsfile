@@ -55,8 +55,8 @@ pipeline {
                 stage('Ansible Deploy') {
 
                    steps {
-
-                           sh "ansible-playbook main.yml -i my-inventory -u jenkins -k ~/.ssh/id_rsa"
+                           echo "deploying ansible playbook on ec2"
+                           sh "ansible-playbook main.yml -i my-inventory -u jenkins --private-key ~/.ssh/id_rsa"
                    }
                 }
     }
