@@ -53,7 +53,7 @@ pipeline {
                             }
                 }
 
-                stage('Ansible Deploy') {
+                stage('Ansible Deploy on ec2') {
 
                    steps {
                            echo "deploying ansible playbook on ec2"
