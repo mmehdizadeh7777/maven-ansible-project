@@ -57,7 +57,7 @@ pipeline {
 
                    steps {
                            echo "deploying ansible playbook on ec2"
-                           sh "ansible-playbook /var/lib/jenkins/workspace/java-app-project/roles/tomcat/tasks/main.yaml -i my-inventory  --key-file ~/.ssh/ansible-key.pem"
+                           sh "ansible-playbook /var/lib/jenkins/workspace/java-app-project/roles/tomcat/tasks/main.yaml -i my-inventory  --key-file ~/.ssh/id_rsa"
                    }
                 }
     }
