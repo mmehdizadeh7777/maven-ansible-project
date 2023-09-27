@@ -58,7 +58,7 @@
 
 
     - name: "copy war file"
-      copy: src=~/result/target/SampleServlet.war dest=/opt/apache-tomcat-10.1.13/webapps/
+      copy: src=~/maven-ansible-project/target/SampleServlet.war dest=/opt/apache-tomcat-10.1.13/webapps/
 
 
       notify: restart tomcat
