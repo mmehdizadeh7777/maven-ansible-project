@@ -67,7 +67,7 @@
     - name: "Install Tomcat init script"
       copy: src=~/maven-ansible-project/roles/tomcat/files/tomcat.service dest=/etc/systemd/system mode=0755
 
-    - name: restart tomcat
+    - name: "restart tomcat"
       systemd:
         state: restarted
         daemon_reload: yes
