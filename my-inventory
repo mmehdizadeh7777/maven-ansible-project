@@ -1,1 +1,1 @@
-web-container ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/ansible-key.pem
+web-container
