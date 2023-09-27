@@ -39,7 +39,7 @@ pipeline {
                     }
                 }
 
-                stage('copy war file in EC2') {
+                /*stage('copy war file in EC2') {
                             steps {
                                 echo "copying war file in EC2 folder"
                                 script{
@@ -51,7 +51,7 @@ pipeline {
                                 }
 
                             }
-                }
+                }*/
 
                 stage('Ansible Deploy on ec2') {
 
